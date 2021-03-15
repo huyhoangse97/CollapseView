@@ -8,6 +8,9 @@
 
     <ExpandableListView
         android:id="@+id/mode_list"
+        android:divider="@color/list_divider"
+        android:dividerHeight="1dp"
+        android:groupIndicator="@null"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

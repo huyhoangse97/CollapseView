@@ -1,4 +1,4 @@
-package com.example.collapseview;
+package com.example.mode_model;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,12 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class ModeListAdapter extends BaseExpandableListAdapter {
+import com.example.collapseview.R;
+
+public class ExpandableModeListAdapter extends BaseExpandableListAdapter {
     private Context context;
-    private ModeContainer modeContainer;
+    private com.example.mode_model.ModeContainer modeContainer;
 
-    public ModeListAdapter(Context context, ModeContainer modeContainer) {
+    public ExpandableModeListAdapter(Context context, com.example.mode_model.ModeContainer modeContainer) {
         this.context = context;
         this.modeContainer = modeContainer;
     }
@@ -53,7 +57,7 @@ public class ModeListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean b, View convertView, ViewGroup viewGroup) {
-        final String modeName = ((Mode)getGroup(groupPosition)).getName();
+        final String modeName = ((com.example.mode_model.Mode)getGroup(groupPosition)).getName();
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -61,18 +65,20 @@ public class ModeListAdapter extends BaseExpandableListAdapter {
         }
 
         int imageId = context.getResources().getIdentifier(modeName, "drawable", (context).getPackageName());
-        ImageButton ib_mode = (ImageButton)convertView.findViewById(R.id.ib_mode);
-        ib_mode.setBackgroundResource(imageId);
+//        ImageButton ib_mode = (ImageButton)convertView.findViewById(R.id.ib_mode);
+//        ib_mode.setBackgroundResource(imageId);
+
+        ImageView tv_mode = convertView.findViewById(R.id.ib_mode);
+        tv_mode.setBackgroundResource(imageId);
 
         return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean b, View convertView, ViewGroup viewGroup) {
-        final String roundName = ((Round) getChild(groupPosition, childPosition)).getName();
-        int roundStars = ((Round) getChild(groupPosition, childPosition)).getStar();
-        String imageName = "round_" + Integer.toString(childPosition) + "_" + Integer.toString(roundStars)
-                + "star";
+        final String roundName = ((com.example.mode_model.Round) getChild(groupPosition, childPosition)).getName();
+        int roundStars = ((com.example.mode_model.Round) getChild(groupPosition, childPosition)).getStar();
+        String imageName = roundName + "_" + Integer.toString(roundStars) +  "star";
 
 
         if (convertView == null) {
@@ -80,9 +86,14 @@ public class ModeListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.round_list, null);
         }
 
+        ImageView tv_round = convertView.findViewById(R.id.ib_round);
         int imageId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
-        ImageButton ib_round = (ImageButton) convertView.findViewById(R.id.ib_round);
-        ib_round.setBackgroundResource(imageId);
+        if (imageId != 0){
+            tv_round.setBackgroundResource(imageId);
+        }
+        else {
+            tv_round.setBackgroundResource(R.drawable.unfound);
+        }
 
         return convertView;
     }

@@ -1,4 +1,4 @@
-package com.example.collapseview;
+package com.example.mode_model;
 
 import java.util.List;
 

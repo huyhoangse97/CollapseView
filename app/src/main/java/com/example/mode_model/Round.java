@@ -1,4 +1,4 @@
-package com.example.collapseview;
+package com.example.mode_model;
 
 public class Round {
     private String name;

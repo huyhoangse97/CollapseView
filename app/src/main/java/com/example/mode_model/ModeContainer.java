@@ -1,6 +1,5 @@
-package com.example.collapseview;
+package com.example.mode_model;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 public class ModeContainer {
